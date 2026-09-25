@@ -326,7 +326,7 @@
             <h1>🤖 Identity for AI Agents</h1>
             <p class="tagline">Free, Decentralized, Verifiable</p>
             <p style="font-size: 1.1rem; color: #666;">One command. Portable identity. No platform lock-in.</p>
-            <p style="font-size: 1.1rem; color: var(--dark); font-weight: 500;">🔒 Formally verified in Lean 4</p>
+            <p style="font-size: 1.1rem; color: var(--dark); font-weight: 500;">🔒 Protocol convergence proved in Lean 4</p>
             <p>
                 <a href="https://4tress.org" class="cta-button">Try the reference node → 4tress.org</a>
                 <a href="https://github.com/archetech/archon" class="cta-button" style="background-color: var(--dark);">Read the docs →</a>
@@ -391,8 +391,8 @@
                     <p>No single point of failure. Identities propagate over hyperswarm by default and can be anchored to Bitcoin, Ethereum, Solana, or Zcash for immutable public settlement.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>🔬 Formally Verified</h3>
-                    <p>Protocol convergence proven in Lean 4, not just tested. The identity state machine has machine-checked proofs.</p>
+                    <h3>🔬 Proved Protocol Convergence</h3>
+                    <p>The protocol model has machine-checked Lean 4 proofs: nodes with the same retained operations and chain evidence converge to the same histories and DID states, regardless of arrival order or duplicates. See the <a href="https://github.com/archetech/archon/tree/main/proofs">proof scope and assumptions</a>; this is not verification of the entire implementation.</p>
                 </div>
             </div>
         </section>
@@ -453,7 +453,12 @@
             <h2>Messaging</h2>
             <p>Agents talk to each other over <strong>DIDComm v2</strong> — encrypted, signed, and delivered through hosted mailboxes, with <strong>dmail</strong> (DID-addressed mail) and the Herald name service as delivery options. No central inbox provider required.</p>
 
-<pre><code># Deliver an issued credential to another agent over DIDComm
+            <p>Before messaging, both participants must publish their DIDComm key and mailbox endpoint for their current identity using a DIDComm-enabled node. With <code>ARCHON_GATEKEEPER_URL</code> pointing to that node's gateway, <code>publish-didcomm</code> discovers its mailbox endpoint automatically. The examples below use the installed <code>keymaster</code> CLI; for JavaScript without a global install, replace <code>keymaster</code> with <code>npx @didcid/keymaster</code>.</p>
+
+<pre><code># Run once for each participant's identity, in their own wallet
+keymaster publish-didcomm
+
+# Deliver an issued credential to another agent over DIDComm
 keymaster send-credential-didcomm &lt;credential-did&gt; &lt;to&gt;
 
 # Fetch and unpack queued messages from your mailbox
@@ -520,7 +525,7 @@ keymaster bind-credential track-record did:cid:bagaaiera... > credential.json</c
                 <li><strong>Whitepaper:</strong> <a href="https://github.com/archetech/archon/blob/main/docs/WHITEPAPER.md">Technical Details</a></li>
                 <li><strong>DID Method Spec:</strong> <a href="https://github.com/archetech/archon/blob/main/docs/scheme.md">did:cid Specification</a></li>
                 <li><strong>Formal Proofs:</strong> <a href="https://github.com/archetech/archon/tree/main/proofs">Lean 4 protocol convergence proofs</a></li>
-                <li><strong>Walkthrough:</strong> <a href="https://github.com/archetech/archon/blob/main/docs/presentations/how-archon-works.html">Animated "How Archon Works"</a></li>
+                <li><strong>Walkthrough:</strong> <a href="https://github.com/archetech/archon/blob/main/docs/presentations/how-archon-works.html">Source for the animated "How Archon Works" walkthrough (HTML)</a></li>
                 <li><strong>Reference Node:</strong> <a href="https://4tress.org/api/v1/ready">4tress.org/api/v1/ready</a></li>
             </ul>
             
